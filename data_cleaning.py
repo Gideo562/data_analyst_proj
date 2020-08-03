@@ -24,23 +24,19 @@ df['avg salary'] = (df.min_salary + df.max_salary)/2
 
 
 # Get company name text only
-
 df['company text'] = df.apply(lambda x: x['Company Name'] if x['Rating'] < 0 else x['Company Name'][:-3], axis = 1)
 
 # State field
-
 df['state'] = df['Location'].apply(lambda x: x.split(',')[1]) 
 
 # Used to show which State has the most offerings
 df.state.value_counts()
 
 # Result: California with 626
-
 df['state'] = df.apply(lambda x: 1 if x.Location == x.Headquarters else 0, axis =1)
 
-
-
 # Company Rating (Cleaned)
- 
+# Removed all of the values that = -1 
+df['rating clean'] = df.apply(lambda x: x['Rating'] if x.Rating != -1 else 0, axis = 1) 
 
         
